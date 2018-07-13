@@ -1,0 +1,52 @@
+<%= form_with(model: prospect, local: true) do |form| %>
+  <% if prospect.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(prospect.errors.count, "error") %> prohibited this prospect from being saved:</h2>
+
+      <ul>
+      <% prospect.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_type %>
+    <%= form.text_field :event_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prospect_date %>
+    <%= form.date_select :prospect_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.select :location, options_for_select(["Salon Azteca", "Salon Ejecutivo", "Salon Reynas"], "Salon Azteca") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pax %>
+    <%= form.number_field :pax %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
