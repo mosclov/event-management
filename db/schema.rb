@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_005444) do
+ActiveRecord::Schema.define(version: 2019_03_12_192703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "prospect_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prospect_id"], name: "index_notes_on_prospect_id"
+  end
 
   create_table "prospects", force: :cascade do |t|
     t.string "name"
@@ -28,4 +36,5 @@ ActiveRecord::Schema.define(version: 2018_07_13_005444) do
     t.string "status", default: "Seguimiento"
   end
 
+  add_foreign_key "notes", "prospects"
 end
