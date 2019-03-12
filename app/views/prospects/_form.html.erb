@@ -46,7 +46,16 @@
     <%= form.number_field :pax %>
   </div>
 
+  <br>
+  <div class="row">
+    <div class="col-md-6 margLeft">
+      <h3>Note for student:</h3>
+      <%= render 'notes/form_prospect' %>
+      <br/>
+    </div>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

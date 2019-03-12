@@ -1,0 +1,17 @@
+
+<h4>Notes:</h4>
+    <table class="table table-hover">
+      <% if @only_notes.count == 0 %>
+        <em><h5>No notes yet</h5></em>
+      <% else %>
+        <% @only_notes.each do |note| %>
+        <tr>
+          <td>
+            <!-- posting all notes for that student -->
+             <small><%=note.created_at.localtime.strftime("%d %b %Y")%></small></h5>
+              <%= note.body %>
+              <% end %>
+          </td>
+        </tr>
+    <% end%>
+    </table>

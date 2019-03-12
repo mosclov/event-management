@@ -1,0 +1,23 @@
+<%= form_for(@note) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <textarea class="form-control" rows="3" type="text_area" name="note[body]">
+  </textarea>
+  <div class="field">
+    <input type="hidden" name="note[prospect_id]" value="<%= @prospect.id %>">
+  </div>
+  <br/>
+  <button name="button" type="submit" class="btn btn-primary">
+    Create Note
+  </button>
+<% end %>
