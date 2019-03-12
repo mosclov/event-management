@@ -12,37 +12,37 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label "Nombre" %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :phone %>
+    <%= form.label "Telefono" %>
     <%= form.text_field :phone %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.label "Correo" %>
     <%= form.text_field :email %>
   </div>
 
   <div class="field">
-    <%= form.label :event_type %>
+    <%= form.label "Tipo de evento" %>
     <%= form.text_field :event_type %>
   </div>
 
   <div class="field">
-    <%= form.label :prospect_date %>
+    <%= form.label "Dia de evento" %>
     <%= form.date_select :prospect_date %>
   </div>
 
   <div class="field">
-    <%= form.label :location %>
+    <%= form.label "Lugar" %>
     <%= form.select :location, options_for_select(["Salon Azteca", "Salon Ejecutivo", "Salon Reynas"], "Salon Azteca") %>
   </div>
 
   <div class="field">
-    <%= form.label :pax %>
+    <%= form.label "Personas" %>
     <%= form.number_field :pax %>
   </div>
 
@@ -54,7 +54,7 @@
   <br>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Crear prospecto"%>
   </div>
 
   <br>

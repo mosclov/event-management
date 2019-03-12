@@ -1,44 +1,44 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @prospect.name %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong>Telefono:</strong>
   <%= @prospect.phone %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Correo:</strong>
   <%= @prospect.email %>
 </p>
 
 <p>
-  <strong>Type:</strong>
+  <strong>Tipo de evento:</strong>
   <%= @prospect.event_type %>
 </p>
 
 <p>
-  <strong>Prospect date:</strong>
+  <strong>Dia de evento:</strong>
   <%= @prospect.prospect_date %>
 </p>
 
 <p>
-  <strong>Location:</strong>
+  <strong>Lugar:</strong>
   <%= @prospect.location %>
 </p>
 
 <p>
-  <strong>Pax:</strong>
+  <strong>Personas:</strong>
   <%= @prospect.pax %>
 </p>
 
 <br>
 <div class="row">
   <div class="col-md-6 margLeft">
-    <h3>Note for student:</h3>
+    <h3>Notas:</h3>
     <%= render 'notes/form_prospect' %>
     <br/>
   </div>
@@ -46,7 +46,7 @@
 
 <div class="row">
   <div class="col-md-6 margLeft">
-    <h4>Notes:</h4>
+    <h4>Notas:</h4>
     <table class="table table-hover">
       <% if @notes.count == 0 %>
         <em><h5>No notes yet</h5></em>
