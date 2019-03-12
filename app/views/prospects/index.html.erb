@@ -26,6 +26,13 @@
         <td><%= prospect.prospect_date %></td>
         <td><%= prospect.location %></td>
         <td><%= prospect.pax %></td>
+        <% if prospect.status == "Seguimiento" %>
+          <td><span class="badge badge-warning">Seguimiento</span></td>
+        <% elsif prospect.status == "Confirmado" %>
+          <td><span class="badge badge-success">Confirmado</span></td>
+        <% else %>
+          <td><span class="badge badge-danger">Declino</span></td>
+        <% end %>
         <td><%= link_to 'Show', prospect %></td>
         <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
         <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
