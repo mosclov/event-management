@@ -1,23 +1,24 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <h1>Prospectos</h1>
 
-<h1>Prospects</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Telefono</th>
+        <th>Correo</th>
+        <th>Tipo</th>
+        <th>Dia Evento</th>
+        <th>Lugar</th>
+        <th>Personas</th>
+        <th>Status</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Type</th>
-      <th>Prospect date</th>
-      <th>Location</th>
-      <th>Pax</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @prospects.each do |prospect| %>
+    <tbody>
+      <% @prospects.each do |prospect| %>
       <tr>
         <td><%= prospect.name %></td>
         <td><%= prospect.phone %></td>
@@ -27,20 +28,22 @@
         <td><%= prospect.location %></td>
         <td><%= prospect.pax %></td>
         <% if prospect.status == "Seguimiento" %>
-          <td><span class="badge badge-warning">Seguimiento</span></td>
+        <td><span class="badge badge-warning">Seguimiento</span></td>
         <% elsif prospect.status == "Confirmado" %>
-          <td><span class="badge badge-success">Confirmado</span></td>
+        <td><span class="badge badge-success">Confirmado</span></td>
         <% else %>
-          <td><span class="badge badge-danger">Declino</span></td>
+        <td><span class="badge badge-danger">Declino</span></td>
         <% end %>
         <td><%= link_to 'Show', prospect %></td>
         <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
         <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'Nuevo Prospecto', new_prospect_path %>
+  <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
+  
+</div>

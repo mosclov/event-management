@@ -1,14 +1,15 @@
-<%= form_with(model: prospect, local: true) do |form| %>
+<div class="container">
+  <%= form_with(model: prospect, local: true) do |form| %>
   <% if prospect.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(prospect.errors.count, "error") %> prohibited this prospect from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(prospect.errors.count, "error") %> prohibited this prospect from being saved:</h2>
 
-      <ul>
+    <ul>
       <% prospect.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
   <div class="field">
@@ -46,9 +47,9 @@
     <%= form.number_field :pax %>
   </div>
 
-  <div class="col-md-3">
-      <%= form.label 'Status' %><br>
-      <%= form.select(:status, ['Seguimiento', 'Confirmado', 'Declino'], {}, class: 'form-control') %>
+  <div class="field">
+    <%= form.label 'Status' %>
+    <%= form.select :status, options_for_select(['Seguimiento', 'Confirmado', 'Declino'], 'Seguimiento') %>
   </div>
 
   <br>
@@ -60,4 +61,6 @@
   <br>
 
 
-<% end %>
+  <% end %>
+
+</div>
