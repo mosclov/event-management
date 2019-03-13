@@ -52,6 +52,11 @@
     <%= form.select :status, options_for_select(['Seguimiento', 'Confirmado', 'Declino'], 'Seguimiento') %>
   </div>
 
+  <div class="field">
+    <%= form.label 'Forma de contacto' %>
+    <%= form.select :contact, options_for_select(['Persona', 'Telefono', 'Facebook', 'Bodas.mx', 'Otro'], 'Persona') %>
+  </div>
+
   <br>
 
   <div class="actions">
