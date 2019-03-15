@@ -7,7 +7,6 @@
       <tr>
         <th>Nombre</th>
         <th>Telefono</th>
-        <th>Correo</th>
         <th>Tipo</th>
         <th>Dia Evento</th>
         <th>Lugar</th>
@@ -22,7 +21,6 @@
       <tr>
         <td><%= prospect.name %></td>
         <td><%= prospect.phone %></td>
-        <td><%= prospect.email %></td>
         <td><%= prospect.event_type %></td>
         <td><%= prospect.prospect_date %></td>
         <td><%= prospect.location %></td>
@@ -45,5 +43,5 @@
   <br>
 
   <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
-  
+
 </div>
