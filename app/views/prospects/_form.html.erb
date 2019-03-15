@@ -57,6 +57,11 @@
     <%= form.select :contact, options_for_select(['Persona', 'Telefono', 'Facebook', 'Bodas.mx', 'Otro'], 'Persona') %>
   </div>
 
+  <div class="field">
+    <%= form.label 'Atendido por' %>
+    <%= form.select :atendido, options_for_select(['Lorena', 'Marcela'], 'Marcela') %>
+  </div>
+
   <br>
 
   <div class="actions">
