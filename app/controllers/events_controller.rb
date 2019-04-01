@@ -1,10 +1,19 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  include EventsHelper
+
+  def make_google_calendar_reservations
+    @schedule = @cohort.schedules.find_by(slug:
+      params[:slug])
+    @calendar = GoogleCalWrapper.new(current_user)
+    @calendar.book_rooms(@schedule)
+  end
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    @calendar = GoogleCalWrapper.new(current_user)
   end
 
   # GET /events/1
@@ -69,6 +78,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :phone, :email, :type, :date, :location, :pax, :contact, :attended_by)
+      params.require(:event).permit(:name, :phone, :email, :event_type, :date, :location, :pax, :contact, :attended_by)
     end
 end
