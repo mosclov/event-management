@@ -2,18 +2,14 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   include EventsHelper
 
-  def make_google_calendar_reservations
-    @schedule = @cohort.schedules.find_by(slug:
-      params[:slug])
-    @calendar = GoogleCalWrapper.new(current_user)
-    @calendar.book_rooms(@schedule)
+  def create_google_cal(event)
+    @calendar = GoogleCalWrapper.new(current_user, event)
   end
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
-    @calendar = GoogleCalWrapper.new(current_user)
   end
 
   # GET /events/1
@@ -34,7 +30,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    create_google_cal(@event)
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -78,6 +74,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :phone, :email, :event_type, :date, :location, :pax, :contact, :attended_by)
+      params.require(:event).permit(:name, :phone, :email, :event_type, :date, :location, :pax, :contact, :attended_by, :start_time, :end_time, :description)
     end
 end

@@ -1,9 +1,11 @@
 module EventsHelper
 
   class GoogleCalWrapper
-    def initialize(current_user)
+    def initialize(current_user, event)
       configure_client(current_user)
+      create_event(event)
     end
+
     def configure_client(current_user)
       @client = Google::APIClient.new
       @client.authorization.access_token = current_user.token
@@ -17,23 +19,27 @@ module EventsHelper
     def calendar_id(event)
       response = @client.execute(api_method:@service.calendar_list.list)
       calendars = JSON.parse(response.body)
-      calendar = calendars["items"].select {|cal| cal["summary"].downcase == event.location.downcase}
-      @cal_id = calendar["id"]
+      calendar = calendars["items"].select {|cal| cal["summary"].downcase == event.downcase}
+      calendar[0]["id"]
     end
 
     def create_event(event)
+      cal_id = calendar_id(event.location)
+      start_time = event.start_time.to_formatted_s(:iso8601)
+      end_time = event.end_time.to_formatted_s(:iso8601)
       event_info = {
         summary: event.name,
         location: event.location,
-        start: {dateTime: event.start},
-        end: {dateTime: event.finish},
+        start: {dateTime: start_time},
+        end: {dateTime: end_time},
         description: event.description,
       }
-      @client.execute(:api_method => @service.events.insert,
-      :parameters => {'calendarId' => @cal_id,
+      response = @client.execute(:api_method => @service.events.insert,
+      :parameters => {'calendarId' => cal_id,
         'sendNotifications' => true},
         :body => JSON.dump(event_info),
         :headers => {'Content-Type' => 'application/json'})
+    # TODO: Catch Errors
     end
   end
 end
