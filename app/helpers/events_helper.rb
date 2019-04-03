@@ -34,12 +34,11 @@ module EventsHelper
         end: {dateTime: end_time},
         description: event.description,
       }
-      @response = @client.execute(:api_method => @service.events.insert,
+      @client.execute(:api_method => @service.events.insert,
       :parameters => {'calendarId' => cal_id,
         'sendNotifications' => true},
         :body => JSON.dump(event_info),
         :headers => {'Content-Type' => 'application/json'})
-      puts @response
     # TODO: Catch Errors
     end
   end
