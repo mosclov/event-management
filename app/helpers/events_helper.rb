@@ -25,8 +25,8 @@ module EventsHelper
 
     def create_event(event)
       cal_id = calendar_id(event.location)
-      start_time = event.start_time.to_formatted_s(:iso8601)
-      end_time = event.end_time.to_formatted_s(:iso8601)
+      start_time = (event.date + (event.start_time).seconds_since_midnight.seconds).to_formatted_s(:iso8601)
+      end_time = (event.date + event.end_time.seconds_since_midnight.seconds).to_formatted_s(:iso8601)
       event_info = {
         summary: event.name,
         location: event.location,
