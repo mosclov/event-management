@@ -1,23 +1,29 @@
-<%= form_with(model: event, local: true) do |form| %>
+<div class="container">
+    <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
+    <ul>
       <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label "Nombre de Evento" %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :phone %>
+    <%= form.label "Contacto" %>
+    <%= form.text_field :contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Telefono" %>
     <%= form.text_field :phone %>
   </div>
 
@@ -27,51 +33,48 @@
   </div>
 
   <div class="field">
-    <%= form.label :event_type %>
+    <%= form.label "Tipo de evento" %>
     <%= form.text_field :event_type %>
   </div>
 
   <div class="field">
-    <%= form.label :date %>
+    <%= form.label "Dia de evento" %>
     <%= form.date_select :date %>
   </div>
 
   <div class="field">
-    <%= form.label :start_time %>
+    <%= form.label "Hora" %>
     <%= form.datetime_select :start_time, :ampm => true, :minute_step => 30, :default => { :hour => 8, :minute => 00 }, :discard_year => true, :discard_month => true, :discar_day => true  %>
   </div>
 
   <div class="field">
-    <%= form.label :end_time %>
+    <%= form.label "Hora que termina" %>
     <%= form.datetime_select :end_time, :ampm => true, :minute_step => 30, :default => { :hour => 10, :minute => 00 }, :discard_year => true, :discard_month => true, :discar_day => true  %>
   </div>
 
   <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
+    <%= form.label "Lugar" %>
+    <%= form.select :location, options_for_select(["Salon Azteca", "Salon Ejecutivo", "Salon Reynas", "Restaurante", "Privado"], "Salon Azteca") %>
   </div>
 
   <div class="field">
-    <%= form.label :pax %>
+    <%= form.label "Personas" %>
     <%= form.number_field :pax %>
   </div>
 
+
   <div class="field">
-    <%= form.label :contact %>
-    <%= form.text_field :contact %>
+    <%= form.label "Atendida por" %>
+    <%= form.select :atendido, options_for_select(['Lorena', 'Marcela'], 'Marcela') %>
   </div>
 
   <div class="field">
-    <%= form.label :attended_by %>
-    <%= form.text_field :attended_by %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
+    <%= form.label "Descripcion" %>
     <%= form.text_field :description %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
-<% end %>
+  <% end %>
+</div>
