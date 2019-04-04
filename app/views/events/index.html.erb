@@ -21,7 +21,7 @@
 
     <tbody>
       <% @events.each do |event| %>
-      <tr>
+      <tr data-link="<%= event_path(event) %>" class="trPointer">
         <td><%= event.name %></td>
         <td><%= event.phone %></td>
         <td><%= event.email %></td>
@@ -40,6 +40,8 @@
   </table>
 
   <br>
+  <%= will_paginate @events %>
+
 
   <%= link_to 'New Event', new_event_path, class: 'btn btn-primary' %>
   <br>
@@ -47,3 +49,9 @@
   <%= link_to 'Prospectos', prospects_path, class: 'btn btn-primary' %>
 
 </div>
+
+<script type="text/javascript">
+  $("tr").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>

@@ -17,7 +17,7 @@
 
     <tbody>
       <% @prospects.each do |prospect| %>
-      <tr>
+      <tr data-link="<%= prospect_path(prospect) %>" class="trPointer">
         <td><%= prospect.name %></td>
         <td><%= prospect.phone %></td>
         <td><%= prospect.event_type %></td>
@@ -39,7 +39,14 @@
     </tbody>
   </table>
 
-  <br>
+
+  <br/>
+
+  <%= will_paginate @prospects %>
+
+  <br/>
+
+
 
   <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
 
@@ -51,3 +58,10 @@
   <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-text" %></li>
 
 </div>
+
+
+<script type="text/javascript">
+  $("tr").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
