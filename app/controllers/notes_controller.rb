@@ -26,10 +26,12 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
-
+    check_id = @note.prospect_id
+    prospect_redirect = '/prospects/' + @note.prospect.id.to_s if check_id
+    event_redirect = '/events/' + @note.event.id.to_s unless check_id
     respond_to do |format|
       if @note.save
-        format.html { redirect_to '/prospects/' + @note.prospect.id.to_s, notice: 'Note was successfully created.' }
+        format.html { redirect_to check_id ? prospect_redirect : event_redirect, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -70,6 +72,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:prospect_id, :body)
+      params.require(:note).permit(:prospect_id, :body, :event_id)
     end
 end

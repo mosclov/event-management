@@ -16,6 +16,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @only_notes = Note.order('created_at DESC').where(event_id: @event.id)
+    @note = Note.new
+    @note.event_id = @event.id
+    @notes = Note.order('created_at DESC').where(event_id: @event.id)
   end
 
   # GET /events/new
