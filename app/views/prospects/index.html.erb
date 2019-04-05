@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Prospectos</h1>
 
-  <table>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Nombre</th>
@@ -21,7 +21,7 @@
         <td><%= prospect.name %></td>
         <td><%= prospect.phone %></td>
         <td><%= prospect.event_type %></td>
-        <td><%= prospect.prospect_date %></td>
+        <td><%= prospect.prospect_date.strftime("%d %b %Y") %></td>
         <td><%= prospect.location %></td>
         <td><%= prospect.pax %></td>
         <% if prospect.status == "Seguimiento" %>

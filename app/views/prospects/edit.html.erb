@@ -1,6 +1,7 @@
-<h1>Editing Prospect</h1>
+<div class="container">
+  <h1>Editing Prospect</h1>
+  <%= render 'form', prospect: @prospect %>
 
-<%= render 'form', prospect: @prospect %>
-
-<%= link_to 'Show', @prospect %> |
-<%= link_to 'Back', prospects_path %>
+  <%= link_to 'Show', @prospect %> |
+  <%= link_to 'Back', prospects_path %>
+</div>
