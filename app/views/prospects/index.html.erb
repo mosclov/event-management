@@ -1,6 +1,11 @@
 <div class="container">
   <h1>Prospectos</h1>
-
+  <span>
+    <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
+    <%= link_to 'Eventos', events_path, class: 'btn btn-primary' %>
+  </span>
+  <br>
+  <br>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -31,9 +36,11 @@
         <% else %>
         <td><span class="badge badge-danger">Declino</span></td>
         <% end %>
-        <td><%= link_to 'Show', prospect %></td>
-        <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
-        <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%  if current_user.has_role? :admin %>
+          <td><%= link_to 'Show', prospect %></td>
+          <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
+          <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
@@ -47,14 +54,11 @@
   <br/>
 
 
-
-  <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
-
+  <span>
+    <%= link_to 'Nuevo Prospecto', new_prospect_path, class: 'btn btn-primary' %>
+    <%= link_to 'Eventos', events_path, class: 'btn btn-primary' %>
+  </span>
   <br>
-  <br>
-  <%= link_to 'Eventos', events_path, class: 'btn btn-primary' %>
-  <br>
-
   <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-text" %></li>
 
 </div>
