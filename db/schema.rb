@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_014746) do
+ActiveRecord::Schema.define(version: 2019_04_06_060128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2019_04_06_014746) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "description"
+    t.decimal "total", precision: 8, scale: 2
+    t.decimal "per_pax", precision: 8, scale: 2
   end
 
   create_table "notes", force: :cascade do |t|
@@ -42,6 +44,15 @@ ActiveRecord::Schema.define(version: 2019_04_06_014746) do
     t.index ["event_id"], name: "index_notes_on_event_id"
     t.index ["prospect_id"], name: "index_notes_on_prospect_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "event_id"
+    t.decimal "amount", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "folio"
+    t.index ["event_id"], name: "index_payments_on_event_id"
   end
 
   create_table "prospects", force: :cascade do |t|
@@ -95,4 +106,5 @@ ActiveRecord::Schema.define(version: 2019_04_06_014746) do
   add_foreign_key "notes", "events"
   add_foreign_key "notes", "prospects"
   add_foreign_key "notes", "users"
+  add_foreign_key "payments", "events"
 end
