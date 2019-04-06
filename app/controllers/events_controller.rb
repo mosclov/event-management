@@ -10,11 +10,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.where("date > ?", Date.today).order(:date).paginate(page: params[:page])
+    @events = Event.where("date > ?", Date.today).order(:date).paginate(page: params[:page], per_page: 20)
   end
 
   def past_events
-    @events = Event.where("date < ?", Date.today).order(:date).paginate(page: params[:page])
+    @events = Event.where("date < ?", Date.today).order(:date).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /events/1

@@ -5,7 +5,7 @@ class ProspectsController < ApplicationController
   # GET /prospects
   # GET /prospects.json
   def index
-    @prospects = Prospect.paginate(page: params[:page])
+    @prospects = Prospect.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /prospects/1

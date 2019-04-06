@@ -6,50 +6,51 @@
   </span>
   <br>
   <br>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Tipo</th>
-        <th>Dia Evento</th>
-        <th>Lugar</th>
-        <th>Personas</th>
-        <th>Status</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="digg_pagination">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Telefono</th>
+          <th>Tipo</th>
+          <th>Dia Evento</th>
+          <th>Lugar</th>
+          <th>Personas</th>
+          <th>Status</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <% @prospects.each do |prospect| %>
-      <tr data-link="<%= prospect_path(prospect) %>" class="trPointer">
-        <td><%= prospect.name %></td>
-        <td><%= prospect.phone %></td>
-        <td><%= prospect.event_type %></td>
-        <td><%= prospect.prospect_date.strftime("%d %b %Y") %></td>
-        <td><%= prospect.location %></td>
-        <td><%= prospect.pax %></td>
-        <% if prospect.status == "Seguimiento" %>
-        <td><span class="badge badge-warning">Seguimiento</span></td>
-        <% elsif prospect.status == "Confirmado" %>
-        <td><span class="badge badge-success">Confirmado</span></td>
-        <% else %>
-        <td><span class="badge badge-danger">Declino</span></td>
+      <tbody>
+        <% @prospects.each do |prospect| %>
+        <tr data-link="<%= prospect_path(prospect) %>" class="trPointer">
+          <td><%= prospect.name %></td>
+          <td><%= prospect.phone %></td>
+          <td><%= prospect.event_type %></td>
+          <td><%= prospect.prospect_date.strftime("%d %b %Y") %></td>
+          <td><%= prospect.location %></td>
+          <td><%= prospect.pax %></td>
+          <% if prospect.status == "Seguimiento" %>
+          <td><span class="badge badge-warning">Seguimiento</span></td>
+          <% elsif prospect.status == "Confirmado" %>
+          <td><span class="badge badge-success">Confirmado</span></td>
+          <% else %>
+          <td><span class="badge badge-danger">Declino</span></td>
+          <% end %>
+          <%  if current_user.has_role? :admin %>
+            <td><%= link_to 'Show', prospect %></td>
+            <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
+            <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
         <% end %>
-        <%  if current_user.has_role? :admin %>
-          <td><%= link_to 'Show', prospect %></td>
-          <td><%= link_to 'Edit', edit_prospect_path(prospect) %></td>
-          <td><%= link_to 'Destroy', prospect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
 
-  <br/>
-
-  <%= will_paginate @prospects %>
+    <br/>
+      <%= will_paginate @prospects %>
+  </div>
 
   <br/>
 
