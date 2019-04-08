@@ -26,6 +26,11 @@
   </p>
 
   <p>
+    <strong>Precio por persona:</strong>
+    <%= @event.per_pax %>
+  </p>
+
+  <p>
     <strong>Date y hora</strong>
     <%= @event.date.strftime("%d %b %Y") %> <%= @event.start_time.strftime("%I:%M %P") %>
   </p>

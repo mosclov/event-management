@@ -3,7 +3,9 @@
 one:
   event: one
   amount: 9.99
+  folio: MyString
 
 two:
   event: two
   amount: 9.99
+  folio: MyString

@@ -38,6 +38,11 @@
   </div>
 
   <div class="field">
+    <%= form.label "Precio por persona" %>
+    <%= form.number_field :per_pax %>
+  </div>
+
+  <div class="field">
     <%= form.label "Dia de evento" %>
     <%= form.date_select :date %>
   </div>
