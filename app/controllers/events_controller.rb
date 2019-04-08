@@ -59,7 +59,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1.json
   def update
     unless @event.total
-      total = @event.per_pax * @event.pax
+      total = @event.per_pax * @event.pax if @event.per_pax && @event.pax
       @event.total = total if total
     end
     respond_to do |format|
