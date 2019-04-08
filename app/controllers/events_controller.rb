@@ -43,7 +43,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     total = @event.per_pax * @event.pax if @event.per_pax && @event.pax
     @event.total = total if total
-    create_google_cal(@event) unless @event.location == "Otro"
+    # create_google_cal(@event) unless @event.location == "Otro"
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
