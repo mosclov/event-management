@@ -27,7 +27,7 @@
 
   <p>
     <strong>Precio por persona:</strong>
-    <%= @event.per_pax %>
+    <%= number_to_currency(@event.per_pax) %>
   </p>
 
   <p>
@@ -51,8 +51,52 @@
     <%= @event.attended_by %>
   </p>
 
+  <% if @event.total %>
+    <p>
+      <strong>Total Evento:</strong>
+      <%= number_to_currency(@event.total) %>
+    </p>
+  <% end %>
   <br>
 
+  <%= link_to "Pagos", new_payment_path(event_id: @event.id ), class: 'btn btn-primary'  %>
+
+  <br>
+  <br>
+
+  <% if @payments.count > 0 %>
+  <h3>Pagos:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Dia</th>
+        <th>Importe</th>
+        <th>Folio</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td>
+            <%= payment.created_at.strftime("%d %b %Y") %>
+          </td>
+          <td>
+            <%= number_to_currency(payment.amount) %>
+          </td>
+          <td>
+            <%= payment.folio %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+    Total: <%= number_to_currency(@total_payments) %>
+  <% end %>
+  <br>
+  <br>
   <div class="row">
     <div class="col-md-6 margLeft">
       <h3>Notas:</h3>
@@ -98,7 +142,7 @@
             </div>
           </div>
 
-          <%= link_to 'Edit', edit_event_path(@event) %> |
-          <%= link_to 'Back', events_path %>
+    <%= link_to 'Edit', edit_event_path(@event) %> |
+    <%= link_to 'Back', events_path %>
 
 </div>

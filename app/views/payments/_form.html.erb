@@ -1,23 +1,23 @@
-<%= form_with(model: payment, local: true) do |form| %>
+<div class="container">
+  <%= form_with(model: payment, local: true) do |form| %>
   <% if payment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
 
-      <ul>
+    <ul>
       <% payment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
   <div class="field">
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
+    <%= form.hidden_field :event_id, value: @event %>
   </div>
 
   <div class="field">
-    <%= form.label :amount %>
+    <%= form.label "Importe (Sin commas)"%>
     <%= form.text_field :amount %>
   </div>
 
@@ -29,4 +29,5 @@
   <div class="actions">
     <%= form.submit %>
   </div>
-<% end %>
+  <% end %>
+</div>

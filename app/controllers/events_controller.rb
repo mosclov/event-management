@@ -24,6 +24,8 @@ class EventsController < ApplicationController
     @note = Note.new
     @note.event_id = @event.id
     @notes = Note.order('created_at DESC').where(event_id: @event.id)
+    @payments = Payment.order('created_at DESC').where(event_id: @event.id)
+    @total_payments = Payment.where(event_id: @event.id).sum(:amount)
   end
 
   # GET /events/new
@@ -39,6 +41,8 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    total = @event.per_pax * @event.pax if @event.per_pax && @event.pax
+    @event.total = total if total
     # create_google_cal(@event)
     respond_to do |format|
       if @event.save
@@ -54,6 +58,10 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    unless @event.total
+      total = @event.per_pax * @event.pax
+      @event.total = total if total
+    end
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
