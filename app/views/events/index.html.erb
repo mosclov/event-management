@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
   <h1>Events</h1>
   <span>
@@ -18,6 +16,7 @@
         <th>Dia</th>
         <th>Lugar</th>
         <th>Personas</th>
+        <th>Status</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -30,6 +29,13 @@
         <td><%= event.date.strftime("%d %b %Y") %></td>
         <td><%= event.location %></td>
         <td><%= event.pax %></td>
+        <% if event.total && (event.payments.count > 0) %>
+          <% if event.payments.sum(:amount).to_i >= event.total %>
+            <td><span class="badge badge-success">Pagdo</span></td>
+          <% else %>
+            <td><span class="badge badge-warning">Por Pagar</span></td>
+          <% end %>
+        <% end %>
         <%  if current_user.has_role? :admin %>
           <td><%= link_to 'Show', event %></td>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>

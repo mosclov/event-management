@@ -17,14 +17,26 @@
   </div>
 
   <div class="field">
+    <%= form.label "Dia"%>
+    <%= form.date_select :dia %>
+  </div>
+
+  <div class="field">
     <%= form.label "Importe (Sin commas)"%>
     <%= form.text_field :amount %>
   </div>
+
 
   <div class="field">
     <%= form.label :folio %>
     <%= form.text_field :folio %>
   </div>
+
+  <div class="field">
+    <%= form.label "Forma de Pago" %>
+    <%= form.select :forma, options_for_select(["Efectivo", "Cheque", "Transferencia", "Tarjeta de Credito", "Otro"], "Efectivo") %>
+  </div>
+
 
   <div class="actions">
     <%= form.submit %>

@@ -20,12 +20,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @only_notes = Note.order('created_at DESC').where(event_id: @event.id)
     @note = Note.new
     @note.event_id = @event.id
     @notes = Note.order('created_at DESC').where(event_id: @event.id)
     @payments = Payment.order('created_at DESC').where(event_id: @event.id)
-    @total_payments = Payment.where(event_id: @event.id).sum(:amount)
+    @total_payments = Payment.order('created_at DESC').where(event_id: @event.id).sum(:amount)
+    @total_debt = @event.total - @total_payments if @event.total
   end
 
   # GET /events/new
@@ -58,10 +58,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    unless @event.total
       total = @event.per_pax * @event.pax if @event.per_pax && @event.pax
       @event.total = total if total
-    end
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

@@ -11,7 +11,6 @@ class ProspectsController < ApplicationController
   # GET /prospects/1
   # GET /prospects/1.json
   def show
-    @only_notes = Note.order('created_at DESC').where(prospect_id: @prospect.id)
     @note = Note.new
     @note.prospect = @prospect
     @notes = Note.order('created_at DESC').where(prospect_id: @prospect.id)

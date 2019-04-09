@@ -7,10 +7,9 @@
         <% @only_notes.each do |note| %>
         <tr>
           <td>
-            <!-- posting all notes for that student -->
-             <small><%=note.created_at.localtime.strftime("%d %b %Y")%></small>
-              <%= note.body %>
-              <% end %>
+           <small><%=note.created_at.localtime.strftime("%d %b %Y")%></small>
+            <%= note.body %>
+            <% end %>
           </td>
         </tr>
     <% end%>

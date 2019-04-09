@@ -68,7 +68,9 @@
             <!-- posting all notes for that student -->
             <small><%=note.created_at.localtime.strftime("%d %b %Y")%></small>
             <%= note.body %>
-            <%= link_to 'Delete note', '#deleteNote', data: {toggle: "modal"}  %>
+            <%  if current_user.has_role? :admin %>
+              <%= link_to 'Delete note', '#deleteNote', data: {toggle: "modal"}  %>
+            <% end %>
             <div class="modal fade" id="deleteNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
