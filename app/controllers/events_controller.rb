@@ -58,8 +58,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-      total = @event.per_pax * @event.pax if @event.per_pax && @event.pax
-      @event.total = total if total
+      total = params[:event][:per_pax].to_i * @event.pax if params[:event][:per_pax] && @event.pax
+      params[:event][:total] = total if total
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
