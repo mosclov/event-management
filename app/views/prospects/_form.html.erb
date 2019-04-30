@@ -47,10 +47,6 @@
     <%= form.number_field :pax %>
   </div>
 
-  <div class="field">
-    <%= form.label 'Status' %>
-    <%= form.select :status, options_for_select(['Seguimiento', 'Confirmado', 'Declino'], 'Seguimiento') %>
-  </div>
 
   <div class="field">
     <%= form.label 'Forma de contacto' %>
@@ -60,6 +56,26 @@
   <div class="field">
     <%= form.label 'Atendido por' %>
     <%= form.select :atendido, options_for_select(['Lorena', 'Marcela'], 'Marcela') %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Status' %>
+    <%= form.select :status, options_for_select(['Seguimiento', 'Confirmado', 'Declino'], 'Seguimiento') %>
+  </div>
+
+  <div class="hidden field">
+    <%= form.label "Hora" %>
+    <%= form.datetime_select :start_time, :ampm => true, :minute_step => 30, :default => { :hour => 8, :minute => 00 }, :discard_year => true, :discard_month => true, :discar_day => true  %>
+  </div>
+
+  <div class="hidden field">
+    <%= form.label "Hora que termina" %>
+    <%= form.datetime_select :end_time, :ampm => true, :minute_step => 30, :default => { :hour => 10, :minute => 00 }, :discard_year => true, :discard_month => true, :discar_day => true  %>
+  </div>
+
+  <div class="hidden field">
+    <%= form.label "Descripcion" %>
+    <%= form.text_field :description %>
   </div>
 
   <br>
@@ -74,3 +90,17 @@
   <% end %>
 
 </div>
+
+<script type="text/javascript">
+
+    $(function() {
+        $('.hidden').hide();
+    });
+
+    $('#prospect_status').click(function(){
+      if ($('#prospect_status')[0].value == "Confirmado"){
+        $('.hidden').show();
+      }
+    });
+
+</script>
